@@ -30,11 +30,7 @@ class _State extends State<SignUp> with Validation {
   final TextEditingController _confirmPass = TextEditingController();
   final TextEditingController _pass = TextEditingController();
 
-  @override
-  void initState() {
-    _getCurrentLocation();
-    super.initState();
-  }
+
 
   void _getCurrentLocation() async {
     try{
@@ -50,6 +46,7 @@ class _State extends State<SignUp> with Validation {
       print(Exception);
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -107,8 +104,10 @@ class _State extends State<SignUp> with Validation {
     );
   }
 
-  Widget mobileField(){
+  Widget mobileField()
+  {
     return TextFormField(
+      keyboardType: TextInputType.number,
       decoration: InputDecoration(
         labelText: "Mobile Field",
       ),
@@ -221,12 +220,14 @@ class _State extends State<SignUp> with Validation {
                          Global.prefs.setString('address',user.address);
                          Global.prefs.setString('password',user.password);
 
-                      Navigator.of(context).pop();
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => HomePage()
-                      ));
+
+
+                        Navigator.pushReplacement(context, MaterialPageRoute(
+                            builder: (context)=>HomePage()));
+
                     }
                     else{
+                        Global.toastMessage(value['message']['phone'][0]);
                       setState(() {
                         Global.visible_progress=false;
                       });
@@ -252,17 +253,10 @@ class _State extends State<SignUp> with Validation {
       child: IconButton(
         icon: Icon(Icons.location_on),
         onPressed: () {
-          position =  _getLocation() as Position;
+          _getCurrentLocation();
         },
       ),
     );
-  }
-
-  // get current location of user
-  Future<Position> _getLocation() async {
-    Position position = await geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    print(position);
-    return position;
   }
 
 

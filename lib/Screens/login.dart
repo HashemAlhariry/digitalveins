@@ -153,10 +153,16 @@ class _State extends State<Login>  with Validation {
                       value['user']['address'], value['user']['password']);
                   Global.loginUser=user;
 
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) =>HomePage()
-                  ));
+
+                  Navigator.pushReplacement(context, MaterialPageRoute(
+                      builder: (context)=>HomePage()));
+
+
+                }else{
+                  Global.toastMessage(value['message']);
+                  setState(() {
+                    Global.visible_progress=false;
+                  });
                 }
 
               });
