@@ -19,28 +19,30 @@ class _State extends State<HomePage> {
           title:Text("Home Page"),
         ) ,
         body: Padding(
+
           padding: EdgeInsets.all(10),
-          child: data == null ? Text("Loading...") :  Column(
+
+          child: data == null ? Text("Loading...") :
+          Column(
             children: [
               Text("Categories",style: TextStyle(
                 fontWeight: FontWeight.w800,
                 fontSize: 25
-              ),),Container(margin: EdgeInsets.only(top:30.0),),
-
+              ),),
+              SizedBox(height: 30,),
               Expanded(
                 flex: 1,
-                  child:ListView.builder(
+                  child:
+                  ListView.builder(
                       itemCount:data['categories'].length,
                       itemBuilder: (BuildContext context , int index){
                             return Column(
                               children: [
                                 Center(
-                                  child: Expanded(
-                                    child: Text(  data['categories'][index]['name'],style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.black
-                                    ),),
-                                  ),
+                                  child: Text(  data['categories'][index]['name'],style: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.black
+                                  ),),
                                 ),
                                 Container(margin: EdgeInsets.only(top:5.0),),
                                 Row(
@@ -50,39 +52,38 @@ class _State extends State<HomePage> {
                                         fontSize: 15
                                     )),
                                     Expanded(
-                                            child: Text(data['categories'][index]['description'],style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.black
-                                      )),
+                                      child: Text(data['categories'][index]['description'],style: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.black
+                                        )),
                                     )
                                   ],
                                 ),
                                 Image.network(data['categories'][index]['image'] ),
                                 Divider(),
-                                Container(margin: EdgeInsets.only(top:30.0),),
                               ],
                             );
                         }
                   ),
               ),
+
               Text("products",style: TextStyle(
                   fontWeight: FontWeight.w800,
                   fontSize: 25
-              ),),Container(margin: EdgeInsets.only(top:30.0),),
-
+              ),),
+              SizedBox(height: 30,),
               Expanded(
-                flex: 2,
+                flex: 1,
                 child:ListView.builder(
                     itemCount:data['products'].length,
                     itemBuilder: (BuildContext context , int index){
                       return Column(
                         children: [
                           Center(
-                            child: Expanded(child: Text(  data['products'][index]['name'],style: TextStyle(
+                            child: Text(  data['products'][index]['name'],style: TextStyle(
                                   fontSize: 14,
                                   color: Colors.black
                               ),),
-                            ),
                           ),
                           Container(margin: EdgeInsets.only(top:5.0),),
                           Row(
@@ -91,13 +92,13 @@ class _State extends State<HomePage> {
                                   fontWeight: FontWeight.w800,
                                   fontSize: 15
                               )),
-                              Expanded(child: Text(data['products'][index]['description'],style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.black
-                                )))
+                              Expanded(child:  Text(data['products'][index]['description'],style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.black
+                              )) )
+
                             ],
                           ),
-                          Container(margin: EdgeInsets.only(top:5.0),),
                           Image.network(data['products'][index]['image'] ),
                           Container(margin: EdgeInsets.only(top:5.0),),
                           Center(
@@ -105,19 +106,16 @@ class _State extends State<HomePage> {
                               fontSize: 20,
                               fontWeight: FontWeight.bold
                             ),),),
-
                           Divider(),
-                          Container(margin: EdgeInsets.only(top:30.0),),
                         ],
                       );
                     }
                 ),
               ),
 
+
             ],
           ),
-
-
         )
     );
   }

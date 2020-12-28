@@ -24,6 +24,9 @@ class _State extends State<SignUp> with Validation {
   String confirmPassword='';
   Position position=null;
   List<Address> address;
+  String latitude="";
+  String longitude="";
+
 
   final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
   final formKey = GlobalKey <FormState>();
@@ -39,6 +42,8 @@ class _State extends State<SignUp> with Validation {
           .then((Position _position) {
         setState(() {
           position = _position;
+          latitude = position.latitude.toString();
+          longitude =position.longitude.toString();
           print(position.latitude);
           print(position.longitude);
         }); } );
@@ -72,6 +77,11 @@ class _State extends State<SignUp> with Validation {
                         Container(margin: EdgeInsets.only(top:10.0),),
                         Text(
                           'position',
+                          style: TextStyle(fontSize: 15,
+                            fontWeight: FontWeight.w500,),
+                        ),
+                        Text(
+                          'Latitude: '+latitude+' Longitude: '+longitude,
                           style: TextStyle(fontSize: 15,
                             fontWeight: FontWeight.w500,),
                         ),
@@ -272,6 +282,7 @@ class _State extends State<SignUp> with Validation {
                 style: TextStyle(fontSize: 20),
               ),
               onPressed: () {
+
                 Navigator.of(context).pop();
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) =>Login()
